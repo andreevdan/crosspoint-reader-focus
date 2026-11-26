@@ -12,6 +12,11 @@
 >
 > Tested only on an Xteink X3. Other boards build but are untouched and unverified.
 >
+> One caveat on other boards: the **Cover Grid** home theme has no Focus Timer row, so on
+> boards with PSRAM (X4 Pro, X4 Classic and similar) pick any other theme in Settings to
+> reach it. On the X3 and X4 it is always available - Cover Grid needs PSRAM those boards
+> do not have, so it is never active there.
+>
 > This is not supported or endorsed by the upstream
 > [CrossPoint Reader](https://github.com/crosspoint-reader/crosspoint-reader) project -
 > please do not send them bug reports about this fork. Upstream's [SCOPE.md](./SCOPE.md)
