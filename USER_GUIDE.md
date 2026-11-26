@@ -109,7 +109,9 @@ Upon turning the device on for the first time, you will be placed on the **[Home
 
 ### 3.1 Home Screen
 
-The Home screen is the main entry point to the firmware. From here you can navigate to **[Reading Mode](#4-reading-mode)** with the most recently read book, **[Browse Files](#33-browse-files-screen)**, the **[Library](#34-library-screen)**, **[File Transfer](#35-file-transfer-screen)**, or **[Settings](#36-settings)**.
+The Home screen is the main entry point to the firmware. From here you can navigate to **[Reading Mode](#4-reading-mode)** with the most recently read book, **[Browse Files](#33-browse-files-screen)**, the **[Library](#34-library-screen)**, **[File Transfer](#35-file-transfer-screen)**, or **[Settings](#36-settings)**. In this fork, Home also offers **Focus Timer**.
+
+**Focus Timer** is a foreground focus timer. Separate Focus and Break boxes show each phase's progress. Press **Confirm** to start or pause it, and use the buttons marked **−** and **+** to adjust the current phase while stopped. At any time, hold **Confirm** for about 0.7 seconds to rotate the screen to landscape for the rest of the session; hold it again to turn it back. The default durations are 45 minutes of focus and 10 minutes of break. At zero, the screen alternates black and white three times, then shows the completed phase with a full bar; **Confirm** starts the next phase. Press **Back** to stop the flashes or leave the timer, which resets the session. The timer has no audible alert and does not continue while you read a book. This is separate from the Reader setting **Focus Reading**, which changes how words are displayed.
 
 When saved reading progress is available, Lyra shows the percentage and a progress bar below the book title and author.
 
@@ -210,7 +212,7 @@ Books cannot be removed from your device through Calibre. Use the web interface 
 
 ### 3.6 Settings
 
-Settings are grouped into **System**, **Display**, **Reader**, **Controls**, **Library**, and **Connectivity**. System contains language, keyboard layouts, hidden-file visibility, file-extension visibility, Clock (where available), firmware updates, and About. Library contains Use Book Metadata, Hide New Files in Recent, Clear Read Books from Recent List, Move Finished Books to Read Folder, and Refresh Library. Time to Sleep is under Display; Clear Reading Cache is under Reader. Connectivity contains Wi-Fi, Bluetooth Page Turner, CrossPoint Sync, OPDS, and the Plugins toggle. The options below describe these settings.
+Settings are grouped into **System**, **Display**, **Reader**, **Controls**, **Library**, and **Connectivity**. System contains language, keyboard layouts, hidden-file visibility, file-extension visibility, focus and break durations, Clock (where available), firmware updates, and About. Library contains Use Book Metadata, Hide New Files in Recent, Clear Read Books from Recent List, Move Finished Books to Read Folder, and Refresh Library. Time to Sleep is under Display; Clear Reading Cache is under Reader. Connectivity contains Wi-Fi, Bluetooth Page Turner, CrossPoint Sync, OPDS, and the Plugins toggle. The options below describe these settings.
 
 #### 3.6.1 Display
 
@@ -357,6 +359,10 @@ Side buttons, and Taps and gestures where supported by the device. See the
 #### 3.6.4 System
 
 **About** shows hardware and firmware information. On EEGO Reader A4, it also shows the factory UID, matching the stock firmware. If the UID cannot be read, its value shows **Error.**
+
+- **Focus minutes / Break minutes**: Set the Focus Timer durations. Focus defaults to 45 minutes and allows 1–120 minutes; Break defaults to 10 minutes and allows 1–30 minutes. Changes made on the timer screen are saved when you leave it.
+
+- **Focus timer sideways**: Open Focus Timer in landscape orientation. This sets how the timer opens; holding **Confirm** on the timer screen rotates it for the current session only and does not change this setting. The Home screen returns to its previous orientation when you leave the timer.
 
 - **Time to Sleep** (**Settings → Display**): Set the duration of inactivity before the device automatically goes to sleep; options are 1, 3, 5, 10 (default), 15 or 30 minutes.
 

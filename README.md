@@ -1,5 +1,24 @@
 # CrossPoint Reader
 
+> ### This is an unofficial fork
+>
+> I enjoyed CrossPoint but really needed a focus and break timer, so I had Codex and
+> Claude build one into this code. It is heavily AI-generated, but it works fine for me.
+> Help yourself if you like it. I will probably add small apps as I need them.
+>
+> **What this fork adds:** a **Focus Timer** on the Home screen - configurable focus and
+> break minutes, a progress bar per phase, a flashing alert when a phase ends, and
+> hold-Confirm to rotate the screen to landscape. Everything else is upstream CrossPoint.
+>
+> Tested only on an Xteink X3. Other boards build but are untouched and unverified.
+>
+> This is not supported or endorsed by the upstream
+> [CrossPoint Reader](https://github.com/crosspoint-reader/crosspoint-reader) project -
+> please do not send them bug reports about this fork. Upstream's [SCOPE.md](./SCOPE.md)
+> deliberately excludes in-firmware apps, which is why this lives in a fork rather than a
+> pull request. Upstream is MIT-licensed and invites community forks; all credit for the
+> firmware itself belongs to them.
+
 [![Fund contributors](https://img.shields.io/badge/%F0%9F%91%91_Fund_contributors-royalty.dev-BB953A?style=for-the-badge&labelColor=1a1a1a)](https://app.royalty.dev/crosspoint-reader/crosspoint-reader)
 
 CrossPoint is open-source e-reader firmware - community-built, fully hackable, free forever. It's maintained by a growing community of developers and readers who believe your device should do what you want - not what a manufacturer decided for you.

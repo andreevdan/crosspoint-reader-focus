@@ -23,12 +23,14 @@
 #include "MappedInputManager.h"
 #include "OpdsServerStore.h"
 #include "RecentBooksStore.h"
+#include "activities/util/FocusTimerActivity.h"
 #include "components/UITheme.h"
 #include "fontIds.h"
 #include "util/BookProgress.h"
 
 int HomeActivity::getMenuItemCount() const {
   int count = 4;  // File Browser, Library, File transfer, Settings
+  if (!coverGridUi) ++count;
   if (!recentBooks.empty()) {
     count += recentBooks.size();
   }
@@ -36,6 +38,14 @@ int HomeActivity::getMenuItemCount() const {
     count++;
   }
   return count;
+}
+
+int HomeActivity::getMenuTop() const {
+  const auto& metrics = UITheme::getInstance().getMetrics();
+  // Classic needs room for the sixth row when Plugins or OPDS is present.
+  const int extraRowShift =
+      SETTINGS.uiTheme == CrossPointSettings::CLASSIC && slotItem() != HomeMenuItem::NONE ? 20 : 0;
+  return metrics.homeTopPadding + metrics.homeCoverTileHeight + metrics.homeMenuTopOffset - extraRowShift;
 }
 
 void HomeActivity::loadRecentBooks(int maxBooks) {
@@ -343,6 +353,9 @@ void HomeActivity::loop() {
       case HomeMenuItem::SETTINGS_MENU:
         onSettingsOpen();
         break;
+      case HomeMenuItem::FOCUS_TIMER:
+        onFocusTimerOpen();
+        break;
       default:
         break;
     }
@@ -449,7 +462,7 @@ void HomeActivity::loop() {
     return;
   }
 
-  const int menuTop = metrics.homeTopPadding + metrics.homeCoverTileHeight + metrics.homeMenuTopOffset;
+  const int menuTop = getMenuTop();
   const int renderedMenuCount =
       menuCount - (metrics.homeContinueReadingInMenu ? 0 : static_cast<int>(recentBooks.size()));
   int menuRow = -1;
@@ -554,8 +567,8 @@ void HomeActivity::render(RenderLock&&) {
 
   // Build menu items dynamically
   std::vector<const char*> menuItems = {tr(STR_BROWSE_FILES), tr(STR_LIBRARY), tr(STR_FILE_TRANSFER),
-                                        tr(STR_SETTINGS_TITLE)};
-  std::vector<UIIcon> menuIcons = {Folder, Library, Transfer, Settings};
+                                        tr(STR_SETTINGS_TITLE), tr(STR_FOCUS_TIMER)};
+  std::vector<UIIcon> menuIcons = {Folder, Library, Transfer, Settings, Blocks};
 
   if (slotItem() != HomeMenuItem::NONE) {
     menuItems.insert(menuItems.begin() + 2, hasPlugins ? tr(STR_PLUGINS) : tr(STR_OPDS_BROWSER));
@@ -570,7 +583,7 @@ void HomeActivity::render(RenderLock&&) {
 
   GUI.drawButtonMenu(
       renderer,
-      Rect{content.x, metrics.homeTopPadding + metrics.homeCoverTileHeight + metrics.homeMenuTopOffset, content.width,
+      Rect{content.x, getMenuTop(), content.width,
            pageHeight - (metrics.headerHeight + metrics.homeTopPadding + metrics.verticalSpacing +
                          metrics.homeMenuTopOffset + metrics.buttonHintsHeight)},
       static_cast<int>(menuItems.size()),
@@ -605,3 +618,12 @@ void HomeActivity::onFileTransferOpen() { activityManager.goToFileTransfer(); }
 void HomeActivity::onOpdsBrowserOpen() { activityManager.goToBrowser(); }
 
 void HomeActivity::onPluginsOpen() { activityManager.goToPlugins(); }
+
+void HomeActivity::onFocusTimerOpen() {
+  auto timer = makeUniqueNoThrow<FocusTimerActivity>(renderer, mappedInput);
+  if (!timer) {
+    LOG_ERR("HOME", "OOM: focus timer activity");
+    return;
+  }
+  startActivityForResult(std::move(timer), [this](const ActivityResult&) { requestUpdate(); });
+}

@@ -392,6 +392,9 @@ class CrossPointSettings : public PersistableStore<CrossPointSettings> {
   // this disabled; settings migration enables it when pre-existing plugin files
   // are found so a firmware update never silently disables an existing setup.
   uint8_t pluginsEnabled = 0;
+  uint8_t focusMinutes = 45;
+  uint8_t focusBreakMinutes = 10;
+  uint8_t focusSideways = 0;
   // User hid the Plugin Hub install row; cleared when plugins are turned back on.
   uint8_t pluginHubPromptHidden = 0;
   // Show hidden files/directories (starting with '.') in the file browser (0 = hidden, 1 = show)

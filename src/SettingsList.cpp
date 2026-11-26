@@ -208,6 +208,12 @@ void forEachBaseSetting(SettingVisitor visit, void* context) {
            .withWebHidden());
 
   // --- System ---
+  emit(SettingInfo::Value(StrId::STR_FOCUS_MINUTES, &CrossPointSettings::focusMinutes, {1, 120, 1}, "focusMinutes",
+                          StrId::STR_CAT_SYSTEM));
+  emit(SettingInfo::Value(StrId::STR_FOCUS_BREAK_MINUTES, &CrossPointSettings::focusBreakMinutes, {1, 30, 1},
+                          "focusBreakMinutes", StrId::STR_CAT_SYSTEM));
+  emit(SettingInfo::Toggle(StrId::STR_FOCUS_SIDEWAYS, &CrossPointSettings::focusSideways, "focusSideways",
+                           StrId::STR_CAT_SYSTEM));
   emit(SettingInfo::Value(
       StrId::STR_TIME_TO_SLEEP, &CrossPointSettings::sleepTimeoutMinutes,
       {CrossPointSettings::MIN_SLEEP_TIMEOUT_MINUTES, CrossPointSettings::MAX_SLEEP_TIMEOUT_MINUTES, 1},
